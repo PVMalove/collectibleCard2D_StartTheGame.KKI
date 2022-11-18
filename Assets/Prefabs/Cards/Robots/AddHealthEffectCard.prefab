@@ -215,7 +215,7 @@ MonoBehaviour:
   _description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
     \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E
     \u044E\u043D\u0438\u0442\u0430 \u043D\u0430 3 \u0435\u0434\u0438\u043D\u0438\u0446\u044B"
-  _sprite: {fileID: 21300000, guid: a4b76586d34cf7b46a8140c064ec51eb, type: 3}
+  _sprite: {fileID: 21300000, guid: 5442ae176fc1b54408f5df9484449d9d, type: 3}
   _price: 1
   _canvasGroup: {fileID: 1038043197004463520}
   IsCanDrag: 0
