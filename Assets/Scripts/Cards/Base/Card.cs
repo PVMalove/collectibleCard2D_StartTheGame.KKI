@@ -24,6 +24,7 @@ namespace Cards.Base
         private Vector2 _startPosition;
 
         public bool IsCanDrag;
+        private int _index;
         public Player Owner => _owner;
         public int Price => _price;
         public string Name => _name;
@@ -86,16 +87,20 @@ namespace Cards.Base
         {
             // if (!IsCanDrag) 
             //     return;
-        
+
+            _index = transform.GetSiblingIndex();
+            transform.SetAsLastSibling();
+            
             transform.localScale = new Vector2(1.2f, 1.2f);
             transform.localPosition = new Vector2(transform.localPosition.x, 205);
+            
         }
         
         public void OnPointerExit(PointerEventData eventData)
         {
             // if (!IsCanDrag) 
             //     return;
-        
+            transform.SetSiblingIndex(_index);
             transform.localScale = new Vector2(1f, 1f);
             transform.localPosition = new Vector2(transform.localPosition.x, 0);
         }
