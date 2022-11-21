@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Cards.Base;
 using Field;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
@@ -76,7 +74,12 @@ namespace Core
             int addForceCount = Game.MoveNumber / 2 + Game.MoveNumber % 2;
             if (addForceCount > 6) 
                 addForceCount = 6;
+            
             _force += Game.MoveNumber / 2 + Game.MoveNumber % 2;
+            
+            if (Game.MoveNumber == 1)
+                _force = 0;
+            
             if (_force > 10)
                 _force = 10;
             

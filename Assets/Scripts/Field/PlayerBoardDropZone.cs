@@ -14,6 +14,7 @@ namespace Field
                 {
                     unitCard.transform.SetParent(transform);
                     unitCard.Owner.MoveCardToBoardFromHand(unitCard);
+                    unitCard.IsCanDrag = false;
                 }
             }
 

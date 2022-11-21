@@ -26,7 +26,7 @@ namespace Cards
         {
             if (_card.TryGetComponent(out UnitCard unitCard))
             {
-                unitCard.helthChanged.AddListener(health => _healthText.text = health.ToString());
+                unitCard.healthChanged.AddListener(health => _healthText.text = health.ToString());
                 unitCard.statusChanged.AddListener(status =>
                 {
                     switch (status)
@@ -79,5 +79,9 @@ namespace Cards
             _attackStatus.SetActive(false);
             _defendStatus.SetActive(false);
         }
+
+
+        
+        
     }
 }
