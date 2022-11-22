@@ -5,6 +5,7 @@
         Non,
         Robot,
         Aquarium,
-        Dwarf
+        Dwarf,
+        Trei
     }
 }

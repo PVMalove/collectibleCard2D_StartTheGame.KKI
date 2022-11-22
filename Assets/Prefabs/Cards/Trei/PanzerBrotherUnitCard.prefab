@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 1825204953128715011}
   - component: {fileID: 1825204953128715012}
   - component: {fileID: -1884279543563896794}
+  - component: {fileID: 7060552044530126639}
   m_Layer: 5
-  m_Name: UnitCardPatern
+  m_Name: PanzerBrotherUnitCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,17 +102,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af09b7535864e29962c63bb39480e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _class: 0
+  _class: 4
   _isLegendary: 0
-  _name: 
-  _description: 
+  _name: "\u041F\u0430\u043D\u0446\u0438\u0440\u043D\u044B\u0439 \u0431\u0440\u0430\u0442"
+  _description: "\u0421\u0442\u0430\u0440\u0442: \u0412\u043E\u0441\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
+    2 \u0435\u0434\u0438\u043D\u0438\u0446\u044B \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F
+    \u0434\u0440\u0443\u0433\u043E\u043C\u0443 \u044E\u043D\u0438\u0442\u0443"
   _sprite: {fileID: 0}
-  _price: 0
+  _price: 3
   _canvasGroup: {fileID: 1443785650832107028}
   IsCanDrag: 0
   IsCardOnBoard: 0
-  _health: 0
-  _damage: 0
+  _health: 4
+  _damage: 2
   _startEffect: {fileID: 0}
   statusChanged:
     m_PersistentCalls:
@@ -157,6 +160,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCard: {fileID: 1825204953128715011}
+--- !u!114 &7060552044530126639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572018580603026683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ce6c1de64f4d859c6701b124992619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthValue: 2
 --- !u!1 &1204780673141050429
 GameObject:
   m_ObjectHideFlags: 0

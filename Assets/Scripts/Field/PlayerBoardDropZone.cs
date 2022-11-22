@@ -14,7 +14,11 @@ namespace Field
                 {
                     unitCard.transform.SetParent(transform);
                     unitCard.Owner.MoveCardToBoardFromHand(unitCard);
-                    //unitCard.IsCanDrag = false;
+                   //
+                    unitCard.transform.localScale = new Vector2(0.6f, 0.6f);
+                    unitCard.IsCardOnBoard = true; 
+                    //
+                    
                 }
             }
 

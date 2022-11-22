@@ -23,7 +23,12 @@ namespace Cards.Base
         private Vector2 _startPosition;
 
         public bool IsCanDrag;
+       
+        //
         private int _index;
+        public bool IsCardOnBoard;
+        //
+        
         public Player Owner => _owner;
         public int Price => _price;
         public string Name => _name;
@@ -47,24 +52,18 @@ namespace Cards.Base
                 _canvasGroup.blocksRaycasts = false;
                 _startPosition = transform.position;
             }
-            // if (!IsCanDrag) return;
-            //
-            // parentReturnTo = this.transform.parent;
-            // transform.SetParent(this.transform.parent.parent, false);
-            //
-            // _canvasGroup.blocksRaycasts = false;
         }
 
         public void OnDrag(PointerEventData eventData) //Перетаскивание
         {
-            // if (IsCanDrag)
-            //     transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-
-            if (!IsCanDrag) return;
-
+            //
+            if (!IsCanDrag) 
+                return;
+            
             Vector3 screenPoint = eventData.position;
             screenPoint.z = 10.0f; //distance of the plane from the camera
             transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+            //
         }
 
         public void OnEndDrag(PointerEventData eventData) // Закончить перетаскивание
@@ -74,16 +73,13 @@ namespace Cards.Base
                 _canvasGroup.blocksRaycasts = true;
                 transform.position = _startPosition;
             }
-            // if (!IsCanDrag) return;
-            //
-            // transform.SetParent(parentReturnTo, false);
-            // _canvasGroup.blocksRaycasts = true;
         }
 
+        //
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // if (!IsCanDrag) 
-            //     return;
+            if(IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
+                return;
             
             GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
             
@@ -96,12 +92,15 @@ namespace Cards.Base
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            // if (!IsCanDrag) 
-            //     return;
+
+            if(IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
+                return;
+
             GetComponentInParent<HorizontalLayoutGroup>().enabled = true;
             transform.SetSiblingIndex(_index);
             transform.localScale = new Vector2(1f, 1f);
             transform.localPosition = new Vector2(transform.localPosition.x, 0);
         }
+        //
     }
 }

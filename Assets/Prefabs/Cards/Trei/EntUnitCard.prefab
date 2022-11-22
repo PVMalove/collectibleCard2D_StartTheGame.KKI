@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1825204953128715012}
   - component: {fileID: -1884279543563896794}
   m_Layer: 5
-  m_Name: UnitCardPatern
+  m_Name: EntUnitCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,16 +102,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _class: 0
-  _isLegendary: 0
-  _name: 
-  _description: 
+  _isLegendary: 1
+  _name: "\u042D\u043D\u0442"
+  _description: "\u0412\u0441\u0435 \u043E\u0441\u0442\u0430\u043B\u044C\u043D\u044B\u0435
+    \u0422\u0440\u0435\u0438 \u0438 \u0440\u043E\u0431\u043E\u0442\u044B \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0442
+    +1 \u043A \u0430\u0442\u0430\u043A\u0435"
   _sprite: {fileID: 0}
-  _price: 0
+  _price: 8
   _canvasGroup: {fileID: 1443785650832107028}
   IsCanDrag: 0
   IsCardOnBoard: 0
-  _health: 0
-  _damage: 0
+  _health: 6
+  _damage: 10
   _startEffect: {fileID: 0}
   statusChanged:
     m_PersistentCalls:

@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3916917694370859028}
   - component: {fileID: 232757351027054768}
   m_Layer: 5
-  m_Name: EffectCardPatern
+  m_Name: MushroomSporesEffectCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

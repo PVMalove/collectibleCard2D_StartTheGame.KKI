@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 572018580603026682}
   - component: {fileID: 572018580603026680}
   - component: {fileID: 1443785650832107028}
-  - component: {fileID: 3615891806993000608}
   - component: {fileID: 1825204953128715011}
   - component: {fileID: 1825204953128715012}
   - component: {fileID: -1884279543563896794}
+  - component: {fileID: 3615891806993000608}
   m_Layer: 5
-  m_Name: UnitCardPatern
+  m_Name: RosehipBushUnitCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,26 +69,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3615891806993000608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572018580603026683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 280
-  m_PreferredHeight: 400
-  m_FlexibleWidth: 0
-  m_FlexibleHeight: 0
-  m_LayoutPriority: 1
 --- !u!114 &1825204953128715011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,17 +81,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af09b7535864e29962c63bb39480e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _class: 0
+  _class: 4
   _isLegendary: 0
-  _name: 
+  _name: "\u041A\u0443\u0441\u0442 \u0448\u0438\u043F\u043E\u0432\u043D\u0438\u043A\u0430"
   _description: 
   _sprite: {fileID: 0}
-  _price: 0
+  _price: 2
   _canvasGroup: {fileID: 1443785650832107028}
   IsCanDrag: 0
   IsCardOnBoard: 0
-  _health: 0
-  _damage: 0
+  _health: 1
+  _damage: 5
   _startEffect: {fileID: 0}
   statusChanged:
     m_PersistentCalls:
@@ -157,6 +137,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCard: {fileID: 1825204953128715011}
+--- !u!114 &3615891806993000608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572018580603026683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 280
+  m_PreferredHeight: 400
+  m_FlexibleWidth: 0
+  m_FlexibleHeight: 0
+  m_LayoutPriority: 1
 --- !u!1 &1204780673141050429
 GameObject:
   m_ObjectHideFlags: 0
