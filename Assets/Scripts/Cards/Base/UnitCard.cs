@@ -30,12 +30,15 @@ namespace Cards.Base
             _startHealth = _health;
         }
 
+        // На доске
         public void OnGoInBoard(bool isStart)
         {
             _status = Status.FirstTurn;
             statusChanged?.Invoke(_status);
+            
             if (isStart && _startEffect)
                 _startEffect.MakeStartEffect();
+            
             Debug.Log($"{Owner.name}: {Name} вступает в бой");
         }
 
@@ -85,6 +88,9 @@ namespace Cards.Base
         public void OnPointerClick(PointerEventData eventData)
         {
             cardClicked?.Invoke(this);
+            
+            Debug.LogWarning("OnPointerClick == UnitCard");
+            
             if (_status == Status.CanAct)
             {
                 if (Owner.CurrentPhase == Phase.Attack)

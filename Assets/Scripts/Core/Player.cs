@@ -106,6 +106,8 @@ namespace Core
         
         public void GoToPlayCardPhase()
         {
+            Debug.LogWarning("GoToPlayCardPhase == Player/ Фаза1: " + _phase);
+            
             _phase = Phase.Play;
             _inBoardCards.ForEach(card =>
             {
@@ -116,6 +118,7 @@ namespace Core
             _inHandCards.ForEach(card => card.IsCanDrag = true);
             FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
             DisableCards();
+            Debug.LogWarning("GoToPlayCardPhase == Player/ Фаза2: " + _phase);
         }
 
         public void GoToAttackPhase()

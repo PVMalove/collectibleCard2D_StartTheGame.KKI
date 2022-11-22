@@ -11,16 +11,23 @@ namespace Cards.UnitEffects
     {
         [SerializeField] private CardClass _class;
         
+        //
+        private List<UnitCard> _classCards;
+        //
+        
         //Создать эффект старта
         public override void MakeStartEffect()
         {
-            List<UnitCard> classCards = Game.Enemy.InBoardCards.Where(card => card.Class == _class).ToList();
+            _classCards = Game.Enemy.InBoardCards.Where(card => card.Class == _class).ToList();
 
-            if (classCards.Count > 0)
+            
+            if (_classCards.Count > 0)
             {
-                //Game.CurrentPlayer.BlockControl();
-                classCards.ForEach(card => card.cardClicked.AddListener(StealCard));
+                _classCards.ForEach(card => card.cardClicked.AddListener(StealCard));
+               
                 Debug.Log("Кликните по юниту над которым нужно установить контроль");
+
+                //Game.CurrentPlayer.BlockControl();
             }
         }
         
@@ -30,8 +37,10 @@ namespace Cards.UnitEffects
             Game.Enemy.RemoveCardFromBoard(unitCard);
             Game.CurrentPlayer.AddCardToBoard(unitCard);
             
+            Debug.LogWarning("Забрал юнита == StealCard");
+            
             Game.CurrentPlayer.GoToPlayCardPhase();
-            Game.CurrentPlayer.InBoardCards.ForEach(card => card.cardClicked.RemoveListener(StealCard));
+            _classCards.ForEach(card => card.cardClicked.RemoveListener(StealCard));
         }
     }
 }
