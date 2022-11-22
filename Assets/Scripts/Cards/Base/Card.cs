@@ -1,16 +1,15 @@
-﻿using Core;
+﻿using System;
+using Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Cards.Base
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler,
+        IPointerExitHandler
     {
-        //
-        Transform parentReturnTo = null; // Return to hand canvas
-        //
-        
         [SerializeField] private CardClass _class = CardClass.Non;
         [SerializeField] private bool _isLegendary;
         [SerializeField] private string _name;
@@ -54,14 +53,13 @@ namespace Cards.Base
             // transform.SetParent(this.transform.parent.parent, false);
             //
             // _canvasGroup.blocksRaycasts = false;
-            
         }
 
         public void OnDrag(PointerEventData eventData) //Перетаскивание
         {
             // if (IsCanDrag)
             //     transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            
+
             if (!IsCanDrag) return;
 
             Vector3 screenPoint = eventData.position;
@@ -80,26 +78,27 @@ namespace Cards.Base
             //
             // transform.SetParent(parentReturnTo, false);
             // _canvasGroup.blocksRaycasts = true;
-
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             // if (!IsCanDrag) 
             //     return;
-
+            
+            GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
+            
             _index = transform.GetSiblingIndex();
             transform.SetAsLastSibling();
             
             transform.localScale = new Vector2(1.2f, 1.2f);
             transform.localPosition = new Vector2(transform.localPosition.x, 205);
-            
         }
-        
+
         public void OnPointerExit(PointerEventData eventData)
         {
             // if (!IsCanDrag) 
             //     return;
+            GetComponentInParent<HorizontalLayoutGroup>().enabled = true;
             transform.SetSiblingIndex(_index);
             transform.localScale = new Vector2(1f, 1f);
             transform.localPosition = new Vector2(transform.localPosition.x, 0);
