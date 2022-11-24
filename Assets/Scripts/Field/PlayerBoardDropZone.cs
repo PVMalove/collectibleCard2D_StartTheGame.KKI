@@ -15,10 +15,9 @@ namespace Field
                     unitCard.transform.SetParent(transform);
                     unitCard.Owner.MoveCardToBoardFromHand(unitCard);
                    //
-                    unitCard.transform.localScale = new Vector2(0.6f, 0.6f);
-                    unitCard.IsCardOnBoard = true; 
+                    unitCard.transform.localScale = new Vector2(0.7f, 0.7f);
+                    unitCard.IsCardOnBoard = true;
                     //
-                    
                 }
             }
 

@@ -16,7 +16,7 @@ namespace Cards
         [SerializeField] private Text _priceText;
         [SerializeField] private GameObject _defendStatus;
         [SerializeField] private GameObject _attackStatus;
-
+        [SerializeField] private GameObject _price;
         private void OnValidate()
         {
             _card = GetComponent<Card>();
@@ -36,6 +36,9 @@ namespace Cards
                             break;
                         case Status.Defender:
                             OnDefendStatus();
+                            break;
+                        case Status.FirstTurn:
+                            OnDisablePrice();
                             break;
                         default:
                             OnAnotherStatus();
@@ -64,24 +67,25 @@ namespace Cards
             }
         }
 
-        public void OnAttackStatus()
+        private void OnAttackStatus()
         {
             _attackStatus.SetActive(true);
         }
 
-        public void OnDefendStatus()
+        private void OnDefendStatus()
         {
             _defendStatus.SetActive(true);
         }
 
-        public void OnAnotherStatus()
+        private void OnDisablePrice()
+        {
+            _price.SetActive(false);
+        }
+
+        private void OnAnotherStatus()
         {
             _attackStatus.SetActive(false);
             _defendStatus.SetActive(false);
         }
-
-
-        
-        
     }
 }

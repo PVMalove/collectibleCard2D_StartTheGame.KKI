@@ -106,8 +106,6 @@ namespace Core
         
         public void GoToPlayCardPhase()
         {
-            Debug.LogWarning("GoToPlayCardPhase == Player/ Фаза1: " + _phase);
-            
             _phase = Phase.Play;
             _inBoardCards.ForEach(card =>
             {
@@ -118,7 +116,6 @@ namespace Core
             _inHandCards.ForEach(card => card.IsCanDrag = true);
             FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
             DisableCards();
-            Debug.LogWarning("GoToPlayCardPhase == Player/ Фаза2: " + _phase);
         }
 
         public void GoToAttackPhase()
@@ -176,6 +173,7 @@ namespace Core
             Debug.Log($"{name} получил урон {damage}");
         }
 
+        //Переместить карту в сброс из руки
         public void MoveCardToDumpFromHand(Card card)
         {
             if (_inHandCards.Contains(card))
@@ -183,6 +181,10 @@ namespace Core
                 _inHandCards.Remove(card);
                 _inDumpCards.Add(card);
                 card.gameObject.SetActive(false);
+                //
+                card.transform.localScale = new Vector2(0.7f, 0.7f);
+                card.IsCardOnBoard = true;
+                //
             }
         }
         
@@ -190,7 +192,7 @@ namespace Core
         public void MoveCardToBoardFromHand(UnitCard card)
         {
             if (_inHandCards.Contains(card) && card.Price <= _force && _inBoardCards.Count <=4)
-            { 
+            {
                 card.OnGoInBoard(true); //На доску
                 _inHandCards.Remove(card);
                 _inBoardCards.Add(card);
@@ -202,6 +204,7 @@ namespace Core
             FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
         }
 
+        //Перемещайте карты с доски на свалку
         public void MoveCardsFromBoardToDump(params UnitCard[] cards)
         {
             foreach (var card in cards)
@@ -216,7 +219,8 @@ namespace Core
             }
             FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
         }
-
+        
+        //Перемещайте карты из колоды на доску
         public void MoveCardsFromDeckToBoard(int count)
         {
             List<UnitCard> unitCards = _inDeckCards.OfType<UnitCard>().Take(count).ToList();
@@ -225,7 +229,12 @@ namespace Core
                 _inDeckCards.Remove(card);
                 _inBoardCards.Add(card);
                 card.OnGoInBoard(false);
+                //
+                card.transform.localScale = new Vector2(0.7f, 0.7f);
+                card.IsCardOnBoard = true;
+                //
             });
+
             FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
         }
 

@@ -19,26 +19,45 @@ namespace Cards.Base
         [SerializeField] private CanvasGroup _canvasGroup;
 
         private Player _owner;
-
         private Vector2 _startPosition;
-
         public bool IsCanDrag;
-       
+
         //
+        [Header("Outline")]
+        public Image CardOutline;
+        [SerializeField] private Color _readyColor;
+        
         private int _index;
         public bool IsCardOnBoard;
         //
-        
+
         public Player Owner => _owner;
+
         public int Price => _price;
+
         public string Name => _name;
+
         public string Description => _description;
+
         public CardClass Class => _class;
 
         private void OnValidate()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
         }
+
+        //
+        private void Update()
+        {
+            if (_owner.Force >= _price && !IsCardOnBoard)
+            {
+                CardOutline.gameObject.SetActive(true);
+                CardOutline.color = _readyColor;
+            }
+            else
+                CardOutline.color = Color.clear;
+        }
+        //
 
         public void InitOwner(Player owner)
         {
@@ -57,9 +76,9 @@ namespace Cards.Base
         public void OnDrag(PointerEventData eventData) //Перетаскивание
         {
             //
-            if (!IsCanDrag) 
+            if (!IsCanDrag)
                 return;
-            
+
             Vector3 screenPoint = eventData.position;
             screenPoint.z = 10.0f; //distance of the plane from the camera
             transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
@@ -78,26 +97,36 @@ namespace Cards.Base
         //
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
+            if (IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
                 return;
-            
-            GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
-            
-            _index = transform.GetSiblingIndex();
-            transform.SetAsLastSibling();
-            
-            transform.localScale = new Vector2(1.2f, 1.2f);
-            transform.localPosition = new Vector2(transform.localPosition.x, 205);
+
+            ShowCardInfo();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-
-            if(IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
+            if (IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
                 return;
 
+            HideCardInfo();
+        }
+
+        private void ShowCardInfo()
+        {
+            GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
+
+            _index = transform.GetSiblingIndex();
+            transform.SetAsLastSibling();
+
+            transform.localScale = new Vector2(1.2f, 1.2f);
+            transform.localPosition = new Vector2(transform.localPosition.x, 205);
+        }
+
+        private void HideCardInfo()
+        {
             GetComponentInParent<HorizontalLayoutGroup>().enabled = true;
             transform.SetSiblingIndex(_index);
+            
             transform.localScale = new Vector2(1f, 1f);
             transform.localPosition = new Vector2(transform.localPosition.x, 0);
         }

@@ -3,6 +3,7 @@ using Cards.UnitEffects;
 using Core;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,8 @@ namespace Cards.Base
         [SerializeField] private int _damage;
         [CanBeNull] [SerializeField] private UnitStartEffect _startEffect;
 
+       
+        
         private Status _status = Status.NonBoard;
         private int _startHealth;
 
@@ -103,6 +106,7 @@ namespace Cards.Base
 
     public enum Status
     {
+        OnGoInBoard,
         NonBoard,
         FirstTurn,
         NotCanAct,
