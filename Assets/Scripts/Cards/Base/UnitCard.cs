@@ -87,6 +87,14 @@ namespace Cards.Base
             if (_health <= 0)
                 Debug.Log($"{Name} ушла в отбой");
         }
+        
+        //
+        public void SetHealth(int value)
+        {
+            _health = value;
+            healthChanged?.Invoke(_health);
+        }
+        //
 
         public void OnPointerClick(PointerEventData eventData)
         {

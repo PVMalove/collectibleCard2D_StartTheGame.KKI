@@ -305,6 +305,13 @@ namespace Core
                     card.IsCanDrag = false;
             });
         }
+
+        public void DecreaseFarce(int value)
+        {
+            _force -= value;
+        }
+
+
     }
 
     public enum Phase
