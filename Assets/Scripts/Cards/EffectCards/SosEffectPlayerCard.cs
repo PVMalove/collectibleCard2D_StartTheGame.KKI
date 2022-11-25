@@ -10,8 +10,8 @@ namespace Cards.EffectCards
         
         public override void MakeEffect()
         {
-            base.MakeEffect();
-            Owner.MoveCardsFromDeckToBoard(_cardCount);
+                base.MakeEffect();
+                Owner.MoveCardsFromDeckToBoard(_cardCount);
         }
     }
 }

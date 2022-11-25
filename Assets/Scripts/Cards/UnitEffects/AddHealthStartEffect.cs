@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Cards.Base;
+﻿using Cards.Base;
 using Core;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace Cards.UnitEffects
         {
             //
             SpawnFX(card);
-            StartCoroutine(StopFX());
+
             //
             card.TakeDamage(-_healthValue);
             Game.CurrentPlayer.GoToPlayCardPhase();
@@ -31,15 +30,6 @@ namespace Cards.UnitEffects
         }
 
         //
-        private IEnumerator StopFX()
-        {
-            Debug.LogWarning("StopFX1");
-            yield return new WaitForSeconds(2);
-            Debug.LogWarning("StopFX2");
-            ParticleSystem componentFX = FX.GetComponent<ParticleSystem>();
-            componentFX.Stop(true);
-        }
-
         private void SpawnFX(UnitCard card) =>
             Instantiate(FX, card.transform.position, Quaternion.identity);
         //
