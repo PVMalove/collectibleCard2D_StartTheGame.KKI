@@ -2,6 +2,7 @@
 using System.Linq;
 using Cards.Base;
 using Core;
+using Field;
 using UnityEngine;
 
 namespace Cards.EffectCards
@@ -24,7 +25,7 @@ namespace Cards.EffectCards
             Game.Enemy.RemoveCardFromBoard(unitCard);
             Game.CurrentPlayer.AddCardToBoard(unitCard);
             
-            Game.CurrentPlayer.GoToPlayCardPhase();
+            FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
         }
 
         private bool ThisCardCanBeSteal(UnitCard card) => 

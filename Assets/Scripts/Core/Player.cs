@@ -27,10 +27,8 @@ namespace Core
         public int CurrentHealth => _currentHealth;
         public int Force => _force;
         
-        public List<UnitCard> InBoardCards
-        {
-            get { return new List<UnitCard>(_inBoardCards); }
-        }
+        public List<UnitCard> InBoardCards => 
+            new List<UnitCard>(_inBoardCards);
 
         public List<Card> InHandCards => new List<Card>(_inHandCards);
         public Card LastInDumpCard => _inDumpCards.LastOrDefault();
@@ -61,20 +59,18 @@ namespace Core
             _inDeckCards = GetRandomDeck(_inDeckCards);
         }
 
-        public void StartMove() //Начать движение
+        public void StartMove()
         {
-            AddCardsToHand(); //Добавить карты в руку
-            _inBoardCards.ForEach(card => card.SetCanAct());
-
-            if (Game.MoveNumber > 10)
+            AddCardsToHand();
+            _inBoardCards.ForEach(card =>
             {
+                if(card.Status != Status.Attacker) 
+                    card.SetCanAct();
+            });
+
+            if (Game.MoveNumber > 10) 
                 TakeDamage(1);
-            }
-            
-            int addForceCount = Game.MoveNumber / 2 + Game.MoveNumber % 2;
-            if (addForceCount > 6) 
-                addForceCount = 6;
-            
+
             _force += Game.MoveNumber / 2 + Game.MoveNumber % 2;
             
             if (Game.MoveNumber == 1)
@@ -82,8 +78,6 @@ namespace Core
             
             if (_force > 10)
                 _force = 10;
-            
-            Debug.Log($"Мощь {gameObject.name} выросла на {addForceCount}");
 
             GoToDefendPhase(Game.Enemy);
         }
@@ -93,12 +87,16 @@ namespace Core
             _phase = Phase.Defend;
             
             _inHandCards.ForEach(card => card.IsCanDrag = false);
-            _inBoardCards.ForEach(card => card.SetCanAct());
+            _inBoardCards.ForEach(card =>
+            {
+                if(card.Status != Status.Attacker) 
+                    card.SetCanAct();
+            });
 
             #region LOG
-            if (Game.Enemy.InBoardCards.FirstOrDefault(card => card.Status == Status.Attacker) && Game.MoveNumber <= 6)
+            if (enemy.InBoardCards.FirstOrDefault(card => card.Status == Status.Attacker) && Game.MoveNumber <= 6)
             {
-                Debug.Log($"{Game.Enemy.name} Вас атакует (Коварный негодяй!)");
+                Debug.Log($"{enemy.name} Вас атакует (Коварный негодяй!)");
                 Debug.Log("Выставтье защитника на поле боя если хотите и нажмите Защита готова");
             }
             #endregion
@@ -212,6 +210,7 @@ namespace Core
                 if (_inBoardCards.Contains(card))
                 {
                     _inBoardCards.Remove(card);
+                    card.transform.localRotation = Quaternion.Euler(0,0,0);
                     _inDumpCards.Add(card);
                     card.ResetCard();
                     card.gameObject.SetActive(false);
@@ -308,10 +307,11 @@ namespace Core
 
         public void DecreaseFarce(int value)
         {
+            if(_force <=0)
+                return;
+            
             _force -= value;
         }
-
-
     }
 
     public enum Phase

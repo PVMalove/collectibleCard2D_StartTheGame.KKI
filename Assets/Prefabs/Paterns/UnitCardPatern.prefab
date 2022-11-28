@@ -109,6 +109,8 @@ MonoBehaviour:
   _price: 0
   _canvasGroup: {fileID: 1443785650832107028}
   IsCanDrag: 0
+  CardOutline: {fileID: 0}
+  _readyColor: {r: 0, g: 0, b: 0, a: 0}
   IsCardOnBoard: 0
   _health: 0
   _damage: 0
@@ -117,6 +119,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  damageChanged:
     m_PersistentCalls:
       m_Calls: []
   cardClicked:
@@ -144,6 +149,7 @@ MonoBehaviour:
   _priceText: {fileID: 6813060689140061265}
   _defendStatus: {fileID: 2877852094333937490}
   _attackStatus: {fileID: 2877852094418588195}
+  _price: {fileID: 0}
 --- !u!114 &-1884279543563896794
 MonoBehaviour:
   m_ObjectHideFlags: 0

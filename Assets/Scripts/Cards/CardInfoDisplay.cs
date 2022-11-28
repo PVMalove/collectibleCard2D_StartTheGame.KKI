@@ -15,7 +15,9 @@ namespace Cards
         [SerializeField] private Text _healthText;
         [SerializeField] private Text _priceText;
         [SerializeField] private GameObject _defendStatus;
+        [SerializeField] private GameObject _defendIcon;
         [SerializeField] private GameObject _attackStatus;
+        [SerializeField] private GameObject _attackIcon;
         [SerializeField] private GameObject _price;
         private void OnValidate()
         {
@@ -33,15 +35,18 @@ namespace Cards
                     {
                         case Status.Attacker:
                             OnAttackStatus();
+                            unitCard.transform.localRotation = Quaternion.Euler(0,0,-15);
                             break;
                         case Status.Defender:
                             OnDefendStatus();
+                            unitCard.transform.localRotation = Quaternion.Euler(0,0,-15);
                             break;
                         case Status.FirstTurn:
                             OnDisablePrice();
                             break;
                         default:
                             OnAnotherStatus();
+                            unitCard.transform.localRotation = Quaternion.Euler(0,0,0);
                             break;
                     }
                 });
@@ -70,11 +75,13 @@ namespace Cards
         private void OnAttackStatus()
         {
             _attackStatus.SetActive(true);
+            _attackIcon.SetActive(true);
         }
 
         private void OnDefendStatus()
         {
             _defendStatus.SetActive(true);
+            _defendIcon.SetActive(true);
         }
 
         private void OnDisablePrice()
@@ -85,7 +92,9 @@ namespace Cards
         private void OnAnotherStatus()
         {
             _attackStatus.SetActive(false);
+            _attackIcon.SetActive(false);
             _defendStatus.SetActive(false);
+            _defendIcon.SetActive(false);
         }
     }
 }

@@ -46,7 +46,6 @@ namespace Cards.Base
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        //
         private void Update()
         {
             if (_owner.Force >= _price && !IsCardOnBoard)
@@ -57,7 +56,6 @@ namespace Cards.Base
             else
                 CardOutline.color = Color.clear;
         }
-        //
 
         public void InitOwner(Player owner)
         {
@@ -75,14 +73,12 @@ namespace Cards.Base
 
         public void OnDrag(PointerEventData eventData) //Перетаскивание
         {
-            //
             if (!IsCanDrag)
                 return;
 
             Vector3 screenPoint = eventData.position;
             screenPoint.z = 10.0f; //distance of the plane from the camera
             transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-            //
         }
 
         public void OnEndDrag(PointerEventData eventData) // Закончить перетаскивание
@@ -94,7 +90,6 @@ namespace Cards.Base
             }
         }
 
-        //
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (IsCardOnBoard || _owner.CurrentPhase == Phase.Attack || _owner.CurrentPhase == Phase.Defend)
@@ -130,6 +125,5 @@ namespace Cards.Base
             transform.localScale = new Vector2(1f, 1f);
             transform.localPosition = new Vector2(transform.localPosition.x, 0);
         }
-        //
     }
 }

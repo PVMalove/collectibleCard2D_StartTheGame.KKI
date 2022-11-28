@@ -14,26 +14,27 @@ namespace Cards.Base
         [SerializeField] private int _health;
         [SerializeField] private int _damage;
         [CanBeNull] [SerializeField] private UnitStartEffect _startEffect;
-
-       
         
         private Status _status = Status.NonBoard;
         private int _startHealth;
 
-        public Status Status => _status;
+        public Status Status
+        {
+            get => _status;
+            set => _status = value;
+        }
+
         public int Damage => _damage;
         public int Health => _health;
 
         public UnityEvent<Status> statusChanged;
         public UnityEvent<int> healthChanged;
+        public UnityEvent<int> damageChanged;
         public UnityEvent<UnitCard> cardClicked;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _startHealth = _health;
-        }
 
-        // На доске
         public void OnGoInBoard(bool isStart)
         {
             _status = Status.FirstTurn;
@@ -88,26 +89,36 @@ namespace Cards.Base
                 Debug.Log($"{Name} ушла в отбой");
         }
         
-        //
         public void SetHealth(int value)
         {
             _health = value;
             healthChanged?.Invoke(_health);
         }
-        //
 
+        public void IncreaseAttack(int value)
+        {
+            _damage += value;
+            damageChanged?.Invoke(_damage);
+        }
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             cardClicked?.Invoke(this);
-            
-            Debug.LogWarning("OnPointerClick == UnitCard");
-            
-            if (_status == Status.CanAct)
+
+            if (Game.CurrentPlayer.InBoardCards.Contains(this))
             {
-                if (Owner.CurrentPhase == Phase.Attack)
-                    Attack();
-                if (Owner.CurrentPhase == Phase.Defend)
-                    Defend();
+                if (_status == Status.CanAct)
+                {
+                    if (Owner.CurrentPhase == Phase.Attack)
+                        Attack();
+                    if (Owner.CurrentPhase == Phase.Defend)
+                        Defend();
+                }
+                else if(_status == Status.Attacker && Owner.CurrentPhase != Phase.Defend || _status == Status.Defender)
+                {
+                    _status = Status.CanAct;
+                    statusChanged?.Invoke(_status);
+                }
             }
         }
     }

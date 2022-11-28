@@ -2,6 +2,7 @@
 using System.Linq;
 using Cards.Base;
 using Core;
+using Field;
 using UnityEngine;
 
 namespace Cards.EffectCards
@@ -24,6 +25,7 @@ namespace Cards.EffectCards
             {
                 _classCards.ForEach(card => card.SetHealth(_reduceHealthTo));
                 SpawnFX();
+                FindObjectOfType<GameBoardGenerator>().Generate(Game.CurrentPlayer, Game.Enemy);
             }
         }
 
